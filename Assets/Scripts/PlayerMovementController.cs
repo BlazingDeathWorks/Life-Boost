@@ -4,10 +4,12 @@ using UnityEngine;
 
 internal class PlayerMovementController : MonoBehaviour
 {
+    [SerializeField] private BoxCollider2D _groundDetection;
     [SerializeField] private float _jumpPower = 3.5f;
     [SerializeField] private float _speed = 3f;
     private float _x, _y;
     private bool _canJump = false;
+    private bool _isGrounded = false;
     private Rigidbody2D _rb;
 
     private void Awake()
@@ -28,8 +30,21 @@ internal class PlayerMovementController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_groundDetection == null) return;
         _rb.velocity = new Vector2(_x * _speed, _rb.velocity.y);
-        if (!_canJump) return;
+        if (!_canJump || !_isGrounded) return;
         _rb.velocity = new Vector2(_rb.velocity.x, _jumpPower);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer != LayerMask.NameToLayer("Wall")) return;
+        _isGrounded = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.layer != LayerMask.NameToLayer("Wall")) return;
+        _isGrounded = false;
     }
 }
