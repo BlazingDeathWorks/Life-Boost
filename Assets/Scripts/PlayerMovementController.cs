@@ -42,6 +42,7 @@ internal class PlayerMovementController : MonoBehaviour
         _isGrounded = true;
     }
 
+    //TODO: Use Collision.GetContacts to only set _isGrounded to false if the returned value is less than or equal to one
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.layer != LayerMask.NameToLayer("Wall")) return;
