@@ -7,6 +7,7 @@ internal class PlayerMovementController : MonoBehaviour
     [SerializeField] private BoxCollider2D _groundDetection;
     [SerializeField] private float _jumpPower = 3.5f;
     [SerializeField] private float _speed = 3f;
+    private int _collisionCount = 0;
     private float _x, _y;
     private bool _canJump = false;
     private bool _isGrounded = false;
@@ -39,13 +40,15 @@ internal class PlayerMovementController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer != LayerMask.NameToLayer("Wall")) return;
+        _collisionCount++;
         _isGrounded = true;
     }
 
-    //TODO: Use Collision.GetContacts to only set _isGrounded to false if the returned value is less than or equal to one
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.layer != LayerMask.NameToLayer("Wall")) return;
+        _collisionCount--;
+        if (_collisionCount >= 1) return;
         _isGrounded = false;
     }
 }
