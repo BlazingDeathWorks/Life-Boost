@@ -12,9 +12,9 @@ TagManager:
   - Water
   - UI
   - Wall
-  - 
-  - 
-  - 
+  - Bullet
+  - Pit
+  - Booster
   - 
   - 
   - 
@@ -44,6 +44,18 @@ TagManager:
   - name: Wall
     uniqueID: 745498763
     locked: 0
+  - name: Bullet
+    uniqueID: 165244631
+    locked: 0
   - name: Player
     uniqueID: 4060231033
+    locked: 0
+  - name: Booster
+    uniqueID: 1091138229
+    locked: 0
+  - name: Goal
+    uniqueID: 1315859771
+    locked: 0
+  - name: Canvas
+    uniqueID: 1374320315
     locked: 0
